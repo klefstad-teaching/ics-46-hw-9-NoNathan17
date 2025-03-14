@@ -98,3 +98,32 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
     return {}; // Return an empty ladder if no solution exists
 }
+
+
+// Function to load words from a file into the word list
+void load_words(set<string>& word_list, const string& file_name) {
+    ifstream file(file_name);
+    if (!file) {
+        cerr << "Error opening file " << file_name << endl;
+        return;
+    }
+
+    string word;
+    while (file >> word) {
+        word_list.insert(word);
+    }
+    file.close();
+}
+
+// Function to print the generated word ladder
+void print_word_ladder(const vector<string>& ladder) {
+    if (ladder.empty()) {
+        cout << "No word ladder found." << endl;
+    } else {
+        cout << "Word ladder: ";
+        for (const string& word : ladder) {
+            cout << word << " ";
+        }
+        cout << endl;
+    }
+}
