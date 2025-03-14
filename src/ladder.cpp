@@ -44,3 +44,20 @@ bool edit_distance_within(const string& str1, const string& str2, int d) {
 
     return diff_count <= d;
 }
+
+// Function to check if two words are adjacent (differ by exactly 1 letter)
+bool is_adjacent(const string& word1, const string& word2) {
+    if (word1.length() == word2.length()) {
+        int diff_count = 0;
+        for (size_t i = 0; i < word1.length(); ++i) {
+            if (word1[i] != word2[i]) {
+                diff_count++;
+                if (diff_count > 1) {
+                    return false;
+                }
+            }
+        }
+        return diff_count == 1;
+    }
+    return false;
+}
