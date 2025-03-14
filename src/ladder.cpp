@@ -63,7 +63,7 @@ bool is_adjacent(const string& word1, const string& word2) {
         }
         return diff_count == 1;
     }
-    
+
     // If the words have lengths differing by exactly 1, check if one word is a prefix of the other
     if (word1.length() == word2.length() + 1 || word2.length() == word1.length() + 1) {
         string longer = word1.length() > word2.length() ? word1 : word2;
@@ -99,8 +99,9 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     queue<vector<string>> ladder_queue;
     unordered_set<string> visited;
 
+    vector<string> begin_ladder = {begin_word};  
     ladder_queue.push(begin_ladder);
-    visited.insert(begin_word);
+    visited.insert(begin_word);    visited.insert(begin_word);
 
     // bfs loop
     while (!ladder_queue.empty()) {
