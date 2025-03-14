@@ -31,10 +31,10 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 
         // Explore all the neighbors of the current vertex
         for (const Edge& e : G[u]) {
-            int v = e.dst;  // Neighbor vertex
-            int weight = e.weight;  // Weight of the edge
+            int v = e.dst;  
+            int weight = e.weight; 
 
-            // Relaxation step: update the distance if a shorter path is found
+            // update the distance if a shorter path is found
             if (distances[u] + weight < distances[v]) {
                 distances[v] = distances[u] + weight;
                 previous[v] = u;  // Record the previous vertex in the path
@@ -70,7 +70,7 @@ void print_path(const vector<int>& path, int total) {
 
     for (int i = 0; i < path.size(); ++i) {
         cout << path[i];
-        if (i < path.size() - 1) cout << " ";  // Separate the words by spaces
+        if (i < path.size() - 1) cout << " "; 
     }
 
     cout << endl;
