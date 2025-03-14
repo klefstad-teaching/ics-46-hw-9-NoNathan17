@@ -59,3 +59,20 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
     
     return path;
 }
+
+// Function to print the shortest path and its total distance
+void print_path(const vector<int>& path, int total) {
+    if (path.empty()) {
+        cout << "No path found." << endl;
+        return;
+    }
+
+    cout << "Shortest path: ";
+    for (int i = 0; i < path.size(); ++i) {
+        cout << path[i];
+        if (i < path.size() - 1) cout << " -> ";
+    }
+
+    cout << endl;
+    cout << "Total distance: " << total << endl;
+}
