@@ -73,6 +73,6 @@ void print_path(const vector<int>& path, int total) {
         if (i < path.size() - 1) cout << " "; 
     }
 
-    cout << endl;
+    cout << "\n";
     cout << "Total cost is " << total << endl;
 }
