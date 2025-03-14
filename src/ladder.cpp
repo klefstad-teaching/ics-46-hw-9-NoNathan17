@@ -1,4 +1,8 @@
 #include "ladder.h"
+#include <queue>
+#include <unordered_set>
+#include <vector>
+#include <string>
 
 void error(string word1, string word2, string msg) {
     cout << "Error: " << msg << endl;
@@ -59,38 +63,62 @@ bool is_adjacent(const string& word1, const string& word2) {
         }
         return diff_count == 1;
     }
+    
+    // If the words have lengths differing by exactly 1, check if one word is a prefix of the other
+    if (word1.length() == word2.length() + 1 || word2.length() == word1.length() + 1) {
+        string longer = word1.length() > word2.length() ? word1 : word2;
+        string shorter = word1.length() > word2.length() ? word2 : word1;
+
+        size_t i = 0, j = 0;
+        bool found_diff = false;
+
+        // Try to find one character difference between the two words
+        while (i < longer.length() && j < shorter.length()) {
+            if (longer[i] != shorter[j]) {
+                if (found_diff) {
+                    return false; // If already found a difference, return false
+                }
+                found_diff = true;
+                i++; // Skip one character in the longer word
+            } else {
+                i++;
+                j++;
+            }
+        }
+
+        return true; // If we find exactly one character difference
+    }
     return false;
 }
 
 // Function to generate the word ladder between the start and end words
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
-    if (begin_word == end_word) {
-        return {begin_word};
-    }
+    if (word_list.find(end_word) == word_list.end()) return {};
+
 
     queue<vector<string>> ladder_queue;
-    set<string> visited;
-    vector<string> begin_ladder = {begin_word};
+    unordered_set<string> visited;
 
     ladder_queue.push(begin_ladder);
     visited.insert(begin_word);
 
+    // bfs loop
     while (!ladder_queue.empty()) {
-        vector<string> current_ladder = ladder_queue.front();
+        vector<string> ladder = ladder_queue.front();
         ladder_queue.pop();
 
-        string last_word = current_ladder.back();
+        string last_word = ladder.back();
 
         for (const string& word : word_list) {
             if (is_adjacent(last_word, word) && visited.find(word) == visited.end()) {
-                vector<string> new_ladder = current_ladder;
-                new_ladder.push_back(word);
+                vector<string> new_ladder = ladder; // copy current ladder
+                new_ladder.push_back(word); // add word to the list
 
                 if (word == end_word) {
                     return new_ladder;
                 }
 
-                ladder_queue.push(new_ladder);
+                ladder_queue.push(new_ladder); 
                 visited.insert(word);
             }
         }
