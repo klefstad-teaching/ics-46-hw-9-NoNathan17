@@ -10,10 +10,8 @@ using namespace std;
 int main() {
     string filename = "src/small.txt";
     
-    // Create a Graph object
     Graph G;
 
-    // Load graph from file
     try {
         file_to_graph(filename, G);
     } catch (const runtime_error& e) {
@@ -21,14 +19,12 @@ int main() {
         return 1;
     }
 
-    // Prompt user for the source and destination vertices
     int source, destination;
     cout << "Enter the source vertex: ";
     cin >> source;
     cout << "Enter the destination vertex: ";
     cin >> destination;
 
-    // Check if the source and destination are valid vertices
     if (source < 0 || source >= G.numVertices || destination < 0 || destination >= G.numVertices) {
         cerr << "Error: Invalid vertex number." << endl;
         return 1;
