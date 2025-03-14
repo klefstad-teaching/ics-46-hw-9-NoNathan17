@@ -51,6 +51,10 @@ bool edit_distance_within(const string& str1, const string& str2, int d) {
 
 // Function to check if two words are adjacent (differ by exactly 1 letter)
 bool is_adjacent(const string& word1, const string& word2) {
+    if (word1 == word2) {
+        return true;
+    }
+
     if (word1.length() == word2.length()) {
         int diff_count = 0;
         for (size_t i = 0; i < word1.length(); ++i) {
@@ -149,7 +153,7 @@ void print_word_ladder(const vector<string>& ladder) {
     if (ladder.empty()) {
         cout << "No word ladder found." << endl;
     } else {
-        cout << "Word ladder: ";
+        cout << "Word ladder found: ";
         for (const string& word : ladder) {
             cout << word << " ";
         }
