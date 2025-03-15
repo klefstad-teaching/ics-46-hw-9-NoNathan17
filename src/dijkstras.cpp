@@ -46,10 +46,9 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     return distances;  // Return the array of distances from the source to each vertex
 }
 
-// Function to extract the shortest path from the source to the destination
 vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination) {
     vector<int> path;
-
+    
     // Find the source (the vertex with no predecessor)
     int source = -1;
     for (int i = 0; i < previous.size(); ++i) {
@@ -58,13 +57,25 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
             break;
         }
     }
-    for (int v = destination; v != source; v = previous[v]) {
-        path.push_back(v);
+
+    // If source was found
+    if (source == -1) {
+        throw runtime_error("Source vertex not found in previous vector.");
     }
-    path.push_back(0);
+
+    // Backtrack from destination to source
+    int v = destination;
+    while (v != source) {
+        path.push_back(v);
+        v = previous[v];  // Move to the predecessor
+    }
+    path.push_back(source);  // Add the source to the path
+
+    // Reverse the path to get it from source to destination
     reverse(path.begin(), path.end());
     return path;
 }
+
 
 // Function to print the shortest path and its total distance
 void print_path(const vector<int>& path, int total) {
