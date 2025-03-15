@@ -52,16 +52,16 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
     
     vector<int> path;
 
-     if (distances[destination] == INF) {
-        return path;  // No path found, return empty path
-    }
+    //  if (distances[destination] == INF) {
+    //     return path;  // No path found, return empty path
+    // }
     
-    for (int v = destination; v != -1; v = previous[v]) {
-        path.push_back(v);
-    }
+    // for (int v = destination; v != -1; v = previous[v]) {
+    //     path.push_back(v);
+    // }
 
-    // Reverse the path to get it from source to destination
-    reverse(path.begin(), path.end());
+    // // Reverse the path to get it from source to destination
+    // reverse(path.begin(), path.end());
     
     return path;
 }
