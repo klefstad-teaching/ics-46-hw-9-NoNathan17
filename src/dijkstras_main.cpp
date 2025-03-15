@@ -8,7 +8,7 @@
 using namespace std;
 
 int main() {
-    string filename = "src/small.txt";
+    string filename = "src/largest.txt";
     
     Graph G;
 
